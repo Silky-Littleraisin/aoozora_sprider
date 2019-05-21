@@ -16,10 +16,12 @@ NEWSPIDER_MODULE = 'aozora_spider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'aozora_spider (+http://www.yourdomain.com)'
+USER_AGENT = 'aozora_spider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+HTTPERROR_ALLOWED_CODES = [404]
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -46,15 +48,15 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'aozora_spider.middlewares.AozoraSpiderSpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+    'aozora_spider.middlewares.AozoraSpiderSpiderMiddleware': 543,
+}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'aozora_spider.middlewares.AozoraSpiderDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'aozora_spider.middlewares.AozoraSpiderDownloaderMiddleware': 543,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +66,13 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'aozora_spider.pipelines.AozoraSpiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'aozora_spider.pipelines.SelfDefineFilePipline': 100,
+}
+# ITEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
+FILES_STORE='/Users/silky/Documents/GitHub/textnovel'
+FILES_URLS_FIELD = 'file_urls'
+FILES_RESULT_FIELD = 'files'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
